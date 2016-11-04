@@ -1,0 +1,89 @@
+
+<body style="background:white;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="HomeProducts" class="navbar-brand">Cars Management</a>
+
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".lewis">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse lewis">
+                <ul class="navbar-nav nav navbar-right">
+                    <li><a href="">Contact</a></li>
+                </ul>
+                <form role="search" class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Serch....." />
+                <input type="submit" value="Search" class="form-control" />
+                </form>
+                <ul class="navbar-nav nav navbar-left">
+                    <li><a href="http://localhost:53755/AdminPanel/ShowProducts?cat=8002&SubCatId=12002">HONDA</a></li>
+                    <li><a href="http://localhost:53755/AdminPanel/ShowProducts?cat=8002&SubCatId=12003">SUZUKI</a></li>
+                    <li><a href="http://localhost:53755/AdminPanel/ShowProducts?cat=8002&SubCatId=12004">TOYOTA</a></li>
+                    <li><a href="">BMW</a></li>
+                    <li><a href="">FAW</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<h1 class="alert-success">
+    Welcome to Adminstrater Panel:
+    @ViewData["SessionName"] @ViewData["Count"]<span style="float:right;color:darkseagreen">
+        @ViewData["SessionType"]
+    </span>
+</h1>
+<div style="border:2px solid">
+
+    @if (ViewBag.owner == ViewBag.type)
+    {
+        <a href="SignUp"><input type="button" class="btn btn-success" value="Add User" /></a>
+    }
+    <a href="AddCategry"><input type="button" class="btn btn-info" value="Add Categry" /></a>
+    <a href="AddSubCategry"><input type="button" class="btn btn-info" value="Add Sub-categry" /></a>
+    <a href="AddProduct"><input type="button" class="btn btn-info" value="Add Product" /></a>
+    <a href="LogOut"><input style="float:right;margin:5px 5px 0px 0px " class="btn-danger" type="button" value="Logout" /></a>
+</div>
+
+<div style="border:2px solid red;width:100%;height:700px;">
+
+    <div style="border:4px solid green;width:18%;height:700px;">
+        <ul style="width:100%;padding:10px 10px 10px 10px;list-style:none;font-size:30px;">
+            <li style="background-color:grey;color:white;text-align:center;">Categries</li>
+            @model IEnumerable<CarsManagement.Models.Categry>
+
+            @foreach (var item in Model)
+            {
+                <li style="text-align:left;">
+                    <a href="ShowProducts?cat=@Html.DisplayFor(modelItem => item.Id)">
+                        @Html.DisplayFor(modelItem => item.CatName)
+                    </a>
+                </li>
+
+
+                //withOut Query String
+                @*<li style="text-align:left;">
+                        <a href="@Url.Action("ShowProducts","AdminPanel",new {cat=@item.Id})">
+                            @Html.DisplayFor(modelItem => item.CatName)
+                        </a>
+                    </li>*@
+            }
+
+        </ul>
+    </div>
+
+</div>
+@*<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashmasticom-1534431960130379%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1174776225930730" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=1174776225930730";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-comments" data-href="http://localhost:53755/" data-width="10%" data-numposts="20"></div>*@

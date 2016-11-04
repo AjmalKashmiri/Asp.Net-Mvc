@@ -1,0 +1,67 @@
+@model CarsManagement.Models.Categry
+@{
+    IList<Categry> CatList = ViewBag.CatList;
+    var abc = Html.Partial("Home", CatList);
+    @abc;
+}
+@*@{
+    IList<SubCategry> SubCatList = ViewBag.SubCatList;
+    var abcd = Html.Partial("Home", SubCatList);
+    @abcd;
+}*@
+<div style="height:600px;width:81%;margin-left:220px;margin-top:-650px;">
+    @if (ViewBag.message != null && ViewBag.message != "")
+    {
+        <h3 class="alert-success">@ViewBag.message</h3>
+    }
+    <form asp-action="AddCategry" method="post" asp-controller="AdminPanel">
+        <div class="form-horizontal">
+            <h4>Add Categry</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CatName" class="col-md-2 control-label">Categry Name</label>
+                <div class="col-md-10">
+                    <input asp-for="CatName" class="form-control" />
+                    <span asp-validation-for="CatName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedBy" type="hidden" value="@ViewData["SessionName"] - (@ViewData["SessionType"])" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedDate" type="hidden" value="@ViewBag.CreatedDate" class="form-control" />
+                    <span asp-validation-for="CreatedDate" class="text-danger" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedBy" class="form-control" />
+                        <span asp-validation-for="ModifiedBy" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ModifiedDate" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedDate" class="form-control" />
+                        <span asp-validation-for="ModifiedDate" class="text-danger" />
+                    </div>
+                </div>*@
+        </div>
+    </form>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

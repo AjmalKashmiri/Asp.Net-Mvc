@@ -1,0 +1,68 @@
+@model IEnumerable<CarsManagement.Models.Products>
+<div>
+    @{
+        IList<Categry> CatList = ViewBag.CatList;
+        var abc = Html.Partial("Home", CatList);
+        @abc;
+    }
+</div>
+
+
+<div style="border:0px solid green;height:650px;width:75%;margin-left:250px;margin-top:-660px;">
+    <span style="float:left;margin-left:10px;">
+        <a href="Home">Home</a>>>
+        @Context.Request.Query["cat"]   >>
+        @Context.Request.Query["SubCatId"]
+
+        @*For SubCatList---------------------------------*@
+        @{
+            IList<SubCategry> SubCatList = ViewBag.SubCatList;
+            var sub = Html.Partial("SubcatList", SubCatList);
+            @sub;
+        }
+    <br />
+     
+        @foreach (var item in Model)
+        {
+
+            <div style="border:5px solid;height:200px;width:200px;float:left;margin:5px 5px 5px 5px">
+                <a href="ProductDetails?Id=@item.Id">
+                    <img class="img-responsive" style="height:150px;" src="~/Data/Images/@item.ProductImage" />
+                    <div>Name:@item.ProductName</div>
+                    <div>Price:@item.ProductPrice</div>
+                </a>
+            </div>
+
+        }
+    }
+    @*For SubCatList---------------------------------*@
+
+    else { 
+
+        @foreach (var sublist in Model)
+        {
+            <div style="border:5px solid;height:200px;width:200px;float:left;margin:5px 5px 5px 5px">
+                <a href="ProductDetails?Id=@sublist.Id">
+                    <img class="img-responsive" style="height:150px;" src="~/Data/Images/@sublist.ProductImage" />
+                    <div>Name:@sublist.ProductName</div>
+                    <div>Price:@sublist.ProductPrice</div>
+                </a>
+            </div>
+
+        }
+    }
+
+@*</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail"><img src="~/Data/Images/09-20-2016-03-02-52.jpg" /></div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail"><img src="~/Data/Images/09-20-2016-03-02-52.jpg" /></div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail"><img src="~/Data/Images/09-20-2016-03-02-52.jpg" /></div>
+            </div>
+        </div>
+    </div>*@

@@ -1,0 +1,11 @@
+﻿@model CarsManagement.Models.AllinOne
+@foreach (var d in Model.categry)
+{
+    <h3>@d.CatName</h3>
+
+}
+<br />
+@foreach (var c in Model.products)
+{
+    <img class="img-responsive" src="~/Data/Images/@c.ProductImage" />
+}

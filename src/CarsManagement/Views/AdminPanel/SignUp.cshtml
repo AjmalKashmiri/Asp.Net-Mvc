@@ -1,0 +1,100 @@
+@model CarsManagement.Models.User
+@{
+    IList<Categry> CatList = ViewBag.CatList;
+    var abc = Html.Partial("Home", CatList);
+    @abc;
+}
+
+<div style="height:600px;width:81%;margin-left:220px;margin-top:-650px;">
+    @if (ViewBag.message != null)
+    {
+        <h3 class="alert-success">@ViewBag.message </h3>
+                
+    }
+
+    <form asp-action="SignUp" method="post" asp-controller="AdminPanel">
+
+        <div class="form-horizontal">
+            <h4>Create User By Admin</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h4 style="color:red;margin-left:300px;">@ViewBag.hintName</h4>
+            <br />
+            <div class="form-group">
+                <label asp-for="UserName" class="col-md-2 control-label">User Name</label>
+                <div class="col-md-10">
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="col-md-2 control-label">Email Address</label>
+                <div class="col-md-10">
+                    <input asp-for="EmailAddress" class="form-control" />
+                    <span asp-validation-for="EmailAddress" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select class="form-control" asp-for="Type">
+                        <option value="">Select Status</option>
+                        <option value="Owner">Owner</option>
+                        <option value="User">User</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedBy" type="hidden" value="@ViewData["SessionName"] - (@ViewData["SessionType"])" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedDate" type="hidden" value="@ViewBag.CreatedDate" class="form-control" />
+                    <span asp-validation-for="CreatedDate" class="text-danger" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedBy" value="@ViewData["ModifiedBy"]" class="form-control" />
+                        <span asp-validation-for="ModifiedBy" class="text-danger" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ModifiedDate" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedDate" value="@ViewBag.ModifiedDate" class="form-control" />
+                        <span asp-validation-for="ModifiedDate" class="text-danger" />
+                    </div>
+                </div>*@
+
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

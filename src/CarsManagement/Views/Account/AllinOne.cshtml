@@ -1,0 +1,8 @@
+﻿@model IEnumerable<CarsManagement.Models.Products>
+
+@foreach(var item in Model)
+{
+    <img class="img-responsive" src="~/Data/Images/@item.ProductImage" />
+}
+
+

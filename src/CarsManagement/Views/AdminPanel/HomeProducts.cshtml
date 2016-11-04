@@ -1,0 +1,30 @@
+@using Sakura.AspNetCore;
+
+@model IPagedList<CarsManagement.Models.Products>
+
+<div>
+    @{
+        IList<Categry> CatList = ViewBag.CatList;
+        var abc = Html.Partial("Home", CatList);
+        @abc;
+    }
+</div>
+
+<div style="border:0px solid green;height:650px;width:75%;margin-left:250px;margin-top:-660px;">
+    <div style="float:left;margin-left:10px;">
+
+        @foreach (var sublist in Model)
+            {
+            <div style="border:5px solid;height:200px;width:200px;float:left;margin:5px 5px 5px 5px">
+                <a href="ProductDetails?Id=@sublist.Id">
+                    <img class="img-responsive" style="height:150px;" src="~/Data/Images/@sublist.ProductImage" />
+                    <div>@sublist.ProductName</div>
+                    <div>Price:@sublist.ProductPrice</div>
+                </a>
+            </div>
+
+        }
+
+        <div><pager source="@Model" /></div>
+    </div>
+</div>

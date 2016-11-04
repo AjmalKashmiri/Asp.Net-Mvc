@@ -1,0 +1,130 @@
+@model CarsManagement.Models.Products
+@{
+    IList<Categry> CatList = ViewBag.CatList;
+    var abc = Html.Partial("Home", CatList);
+    @abc;
+}
+@*@{
+    IList<SubCategry> SubCatList = ViewBag.SubCatList;
+    var abcd = Html.Partial("Home", SubCatList);
+    @abcd;
+}*@
+<div style="height:600px;width:81%;margin-left:220px;margin-top:-650px;">
+    @if (ViewBag.message != null && ViewBag.message != "")
+    {
+        <h3 class="alert-success">@ViewBag.message</h3>
+    }
+
+    <form asp-action="AddProduct" method="post" asp-controller="AdminPanel" enctype="multipart/form-data">
+        <div class="form-horizontal">
+            <h4>Add Products</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{
+                //string cat = Context.Request.Query["cat"];
+                IList<Categry> SelectCategry = ViewBag.SelectCategry;
+                SelectList OSLCat = new SelectList(SelectCategry, "Id", "CatName");//Id as a value field name as a text field
+            }
+            <div class="form-group">
+                <label class="col-md-2 control-label">Categry</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("CatId", OSLCat, "Select Categry Name", new { @class = "form-control" })
+              
+                </div>
+            </div>
+            @{
+                
+                IList<SubCategry> SelectSubCategry = ViewBag.SelectSubCategry;
+                SelectList OSLSubCat = new SelectList(SelectSubCategry, "Id", "SubCatName");//Id as a value field name as a text field
+            }
+            <div class="form-group">
+                <label class="col-md-2 control-label">Sub-Categry</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("SubCatId", OSLSubCat, "Select Sub-Categry Name", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductName" class="col-md-2 control-label">Name</label>
+                <div class="col-md-10">
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="col-md-2 control-label">Description</label>
+                <div class="col-md-10">
+                    <input asp-for="ProductDescription" class="form-control" />
+                    <span asp-validation-for="ProductDescription" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductImage" class="col-md-2 control-label">Image</label>
+                <div class="col-md-10">
+                    <input asp-for="ProductImage" name="Image" id="Image" type="file" class="form-control" />
+                    <span asp-validation-for="ProductImage" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="col-md-2 control-label">Price</label>
+                <div class="col-md-10">
+                    <input asp-for="ProductPrice" class="form-control" />
+                    <span asp-validation-for="ProductPrice" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add" class="btn btn-default" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="CatId" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="CatId" class="form-control" />
+                        <span asp-validation-for="CatId" class="text-danger" />
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedBy" type="hidden" value="@ViewData["SessionName"] - (@ViewData["SessionType"])" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CreatedDate" type="hidden" value="@ViewBag.CreatedDate" class="form-control" />
+                    <span asp-validation-for="CreatedDate" class="text-danger" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedBy" class="form-control" />
+                        <span asp-validation-for="ModifiedBy" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ModifiedDate" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ModifiedDate" class="form-control" />
+                        <span asp-validation-for="ModifiedDate" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubCatId" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="SubCatId" class="form-control" />
+                        <span asp-validation-for="SubCatId" class="text-danger" />
+                    </div>
+                </div>*@
+        </div>
+    </form>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

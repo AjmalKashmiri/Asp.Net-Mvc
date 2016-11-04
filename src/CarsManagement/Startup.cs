@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using CarsManagement.Data;
 using CarsManagement.Models;
 using CarsManagement.Services;
+using Sakura.AspNetCore.Mvc;
+
 
 namespace CarsManagement
 {
@@ -48,15 +50,26 @@ namespace CarsManagement
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<CarsManagementContext>(options =>
+    options.UseSqlServer(Configuration.GetConnectionString("MYCON")));
+
+
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddSession();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddBootstrapPagerGenerator(options =>
+            {
+                options.ConfigureDefault();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,14 +96,21 @@ namespace CarsManagement
             app.UseStaticFiles();
 
             app.UseIdentity();
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
+
             app.UseMvc(routes =>
             {
+
+                //    routes.MapRoute(
+                //    name: "areas",
+                //    template: "{area=AdminPanel}/{controller=AdminPanel}/{action=AdminPage}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=AdminPanel}/{action=ProductGallery}/{id?}");
             });
         }
     }

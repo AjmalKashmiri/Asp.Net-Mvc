@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-CarsManagement-293386d9-fa75-4e18-84d3-cf1a6e5eef2b",
 
   "dependencies": {
@@ -14,6 +14,7 @@
     },
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.AspNetCore.Session": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": {
@@ -36,10 +37,12 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc":  {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Sakura.AspNetCore.Mvc.PagedList": "2.0.9",
+    "Sakura.AspNetCore.PagedList": "2.0.1"
   },
 
   "tools": {

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                $('#ex1').zoom();
+                $('#ex2').zoom({ on: 'grab' });
+                $('#ex3').zoom({ on: 'click' });
+                $('#ex4').zoom({ on: 'toggle' });
+            });
+
+            $(function () {
+
+                var productid = @Context.Request.Query["CatId"];
+                $("#productdata").load("@Url.Action("SearchProductByAjax", "AdminPanel")",//Url jidr jaiy
+                {
+                    ProductId: productid //Data agr multiple parameter bejny hn to idr coma lga kr bajin
+                }
+                );
+
+            });
+        </script>
+
+    }
+
+
+</head>
+<body>
+    @model CarsManagement.Models.Products
+
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+    <script src='jquery.zoom.js'></script>
+
+    <div>
+        <b>@Html.DisplayNameFor(model => model.ProductName):</b>
+        @Html.DisplayFor(model => model.ProductName)
+    </div>
+
+    <span class='zoom' id='ex1'>
+        <img src='~/Data/Images/@Model.ProductImage' width='555' height='320' alt='Daisy on the Ohoopee' />
+
+    </span>
+    <div class="clearfix"></div>
+    <label class="success">Related Products</label>
+    <div id="productdata">
+
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+@model CarsManagement.Models.Products
+
+@{
+    ViewData["Title"] = "UpdateProduct";
+}
+
+<h2>UpdateProduct</h2>
+
+<form asp-action="UpdateProduct" method="post" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Products</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="CatId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CatId" class="form-control" />
+                <span asp-validation-for="CatId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedBy" value="" class="form-control" />
+                <span asp-validation-for="ModifiedBy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ModifiedDate" class="form-control" />
+                <span asp-validation-for="ModifiedDate" class="text-danger" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="ProductName" class="col-md-2 control-label">Name</label>
+            <div class="col-md-10">
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProductDescription" class="col-md-2 control-label">Description</label>
+            <div class="col-md-10">
+                <input asp-for="ProductDescription" class="form-control" />
+                <span asp-validation-for="ProductDescription" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductImage" class="col-md-2 control-label">Image</label>
+            <div class="col-md-10">
+                <input asp-for="ProductImage" type="file"  class="form-control" />
+                <span asp-validation-for="ProductImage" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductPrice" class="col-md-2 control-label">Price</label>
+            <div class="col-md-10">
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SubCatId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SubCatId" class="form-control" />
+                <span asp-validation-for="SubCatId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="HomeProducts">Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

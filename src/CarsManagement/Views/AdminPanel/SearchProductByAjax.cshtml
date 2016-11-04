@@ -1,0 +1,27 @@
+
+<input type="text" id="ProductId" />
+<button id="sbtn" type="button" value="Search">Search</button>
+
+<div id="productdata"></div> @*data ajax ke call any k bad idr aiy ga*@
+<div class="clearfix"></div>
+                
+@section scripts
+{
+    <script>
+        $(function () {
+
+            $("#sbtn").click(function () {
+                var productid=$("#ProductId").val();
+                $("#productdata").load("@Url.Action("SearchProductByAjax", "AdminPanel")",//Url jidr jaiy
+                {
+                    ProductId: productid //Data agr multiple parameter bejny hn to idr coma lga kr bajin
+
+                },
+                function () { alert("Task Done") }
+                );
+            });
+
+        });
+    </script>
+
+}

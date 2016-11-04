@@ -1,0 +1,92 @@
+@using Sakura.AspNetCore;
+
+@model IList<CarsManagement.Models.Products>
+
+
+@*@model IPagedList<CarsManagement.Models.Products>*@
+
+@{
+    ViewData["Title"] = "ProductsList";
+}
+
+<h2>ProductsList</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" id="myTable">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDescription)
+            </td>
+            <td>
+                <img class="img-responsive" style="width:70px;height:70px;" src="~/Data/Images/@item.ProductImage" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCatId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="delbtn" href="#" data-productid="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+@*<pager resource="@Model"/>*@
+
+@section scripts
+{
+    <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script link="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            alert(1);
+            $('#myTable').DataTable();
+
+            $(".delbtn").click(function () {
+                var productid = $(this).data("productid");
+                var dada = $(this).parent().parent();
+                alert(productid);
+
+                $.ajax({
+                    data: { Id: productid },
+                    url: '@Url.Action("DeleteProduct","AdminPanel")',
+                    type: 'GET',
+                    success: function (responce) {
+                        if (responce == "DONE")
+                            alert("Product with Id =" + productid + " has been deleted succesfully.");
+                        dada.fadeOut();
+
+                    }
+
+                });
+            });
+
+        });
+    </script>
+
+}

@@ -1,0 +1,15 @@
+@model IEnumerable<CarsManagement.Models.SubCategry>
+
+<select onchange="location = this.value" style="float:right;">
+
+    <option value="">Sub-Categry</option>
+    @{
+        string cat = Context.Request.Query["cat"];
+    }
+        @foreach (var item in Model)
+        {
+            <option value="ShowProducts?cat=@cat&SubCatId=@item.Id">
+                @item.SubCatName
+        </option>
+        }
+    </select>
